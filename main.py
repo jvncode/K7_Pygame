@@ -106,32 +106,45 @@ class Robot:
         return self.frames[self.frame_act]
 
 
-
 class Game:
     clock = time.Clock()
 
     def __init__(self):
         self.screen = display.set_mode((800, 600))
-        display.set_caption('Hola mundo!')
+        display.set_caption('Hola mundo')
+        
+        self.background_color = (150, 150, 222)
 
-        self.background_color = (150, 150 ,222)
-
-        self.robot = Robot(400, 300)
+        self.robot =  Robot(400, 300)
 
         self.bombas = []
         for i in range(5):
-            self.bomb = Bomb(randint(0, 750), randint(0, 550))
+            self.bomb = Bomb(randint(0,750), randint(0,550))
             self.bombas.append(self.bomb)
 
     def gameOver(self):
         quit()
         sys.exit()
 
+
+
+    def mainloop(self):
+        while True:
+        dt = self.clock.tick(FPS)
+
+        self.screen.fill(self.background_color)
+        self.screen.blit(self.robot.image, robot.position)
+        for b in bombas:
+            b.update(dt)
+            screen.blit(b.image, b.position)
+
+        display.flip()
+
+
     def handleEvents(self):
         for ev in event.get():
             if ev.type == QUIT:
-                self.gameOver()
-
+                self.gameOver
             if ev.type == KEYDOWN:
                 if ev.key == K_UP:
                     self.robot.go_up()
@@ -141,33 +154,23 @@ class Game:
                     self.robot.go_left()
                 if ev.key == K_RIGHT:
                     self.robot.go_right()
-
+        
         keys_pressed = key.get_pressed()
         if keys_pressed[K_UP]:
-            self.robot.go_up()
+            robot.go_up()
+        
         if keys_pressed[K_DOWN]:
-            self.robot.go_down()
+            robot.go_down()
+
         if keys_pressed[K_RIGHT]:
-            self.robot.go_right()
+            robot.go_right()
+
         if keys_pressed[K_LEFT]:
-            self.robot.go_left()
+            robot.go_left()
 
 
-    def mainloop(self):
-        while True:
-            dt = self.clock.tick(FPS)
-
-            self.handleEvents()
-
-            self.screen.fill(self.background_color)
-            self.screen.blit(self.robot.image, self.robot.position)
-            for b in self.bombas:
-                b.update(dt)
-                self.screen.blit(b.image, b.position)
-
-            display.flip()
 
 
-if __name__ == '__main__':
+if __name__=='__main__':
     game = Game()
     game.mainloop()
