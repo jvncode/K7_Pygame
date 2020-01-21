@@ -45,9 +45,7 @@ class Bomb(sprite.Sprite):
         #self.frame_act = (self.frame_act +1) % self.num_frames
 
 
-    @property
-    def position(self):
-        return (self.rect.x, self.rect.y)
+
     
     @property
     def image(self):
@@ -111,9 +109,6 @@ class Robot(sprite.Sprite):
         self.change_frame()
     
 
-    @property
-    def position(self):
-        return (self.rect.x, self.rect.y)
     
     @property
     def image(self):
